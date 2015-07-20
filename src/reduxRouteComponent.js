@@ -19,6 +19,12 @@ function routerMiddleware(router) {
   };
 }
 
+const storeShape = PropTypes.shape({
+    subscribe: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    getState: PropTypes.func.isRequired
+});
+
 /**
  * Creates a component to be used as the `component` prop of a <Route />. Also
  * adds the store to context, serving as a replacement for <Provider />
@@ -32,7 +38,7 @@ export default function reduxRouteComponent(s) {
     }
 
     static childContextTypes = {
-      store: PropTypes.object
+      store: storeShape.isRequired
     }
 
     constructor(props, context) {
